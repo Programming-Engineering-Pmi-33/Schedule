@@ -17,9 +17,9 @@ namespace ScheduleWebApp.DAL
         {
             return _db.Faculties.ToList();
         }
-        public List<Group> GetGroups( string  faculty_name)
+        public List<FacultyGroup> GetFacultyGroups( string  faculty_name)
         {
-            return _db.Groups.FromSqlInterpolated($"SELECT * FROM faculty_groups({faculty_name})").ToList();
+            return _db.FacultyGroups.FromSqlInterpolated($"SELECT * FROM get_faculty_groups({faculty_name})").ToList();
         }
 
         public List<Request> GetRequests()

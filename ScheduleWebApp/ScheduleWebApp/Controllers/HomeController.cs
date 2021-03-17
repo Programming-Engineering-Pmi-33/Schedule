@@ -26,7 +26,7 @@ namespace ScheduleWebApp.Controllers
             DAL.DataLayerFunctions data = new DAL.DataLayerFunctions(_context);
             var f=data.GetFaculties();
             var r=data.GetRequests();
-            var g=data.GetGroups("aaaa");
+            var g=data.GetFacultyGroups("aaaa");
             return View();
         }
         public IActionResult Privacy()
