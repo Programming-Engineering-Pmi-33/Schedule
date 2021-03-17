@@ -22,7 +22,11 @@ namespace ScheduleWebApp.Controllers
         }
 
         public IActionResult Index()
-        {           
+        {
+            DAL.DataLayerFunctions data = new DAL.DataLayerFunctions(_context);
+            var f=data.GetFaculties();
+            var r=data.GetRequests();
+            var g=data.GetGroups("aaaa");
             return View();
         }
         public IActionResult Privacy()
