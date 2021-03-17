@@ -23,6 +23,7 @@ namespace ScheduleWebApp
         public virtual DbSet<Schedule> Schedules { get; set; }
         public virtual DbSet<Subject> Subjects { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public DbSet<DetailedSchedule> DetailedSchedules { get; set; }
         public virtual DbSet<UserSubject> UserSubjects { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -191,6 +192,7 @@ namespace ScheduleWebApp
                     .HasForeignKey(d => d.UserId)
                     .HasConstraintName("userSubjects_userId_fkey");
             });
+            modelBuilder.Entity<DetailedSchedule>().HasNoKey();
             OnModelCreatingPartial(modelBuilder);
         }
 

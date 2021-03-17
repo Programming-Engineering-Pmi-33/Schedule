@@ -22,7 +22,9 @@ namespace ScheduleWebApp.Controllers
         }
 
         public IActionResult Index()
-        {           
+        {
+
+            DetailedScheduleFunctions.GetLecturerSchedule("f", "fff", _context);
             return View();
         }
         public IActionResult Privacy()
