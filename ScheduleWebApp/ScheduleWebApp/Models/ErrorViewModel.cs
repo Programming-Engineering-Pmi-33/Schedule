@@ -1,5 +1,6 @@
 using System;
 
+
 namespace ScheduleWebApp.Models
 {
     public class ErrorViewModel

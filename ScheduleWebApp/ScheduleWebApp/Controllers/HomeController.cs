@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-
+using Microsoft.EntityFrameworkCore;
 using ScheduleWebApp.Models;
 
 namespace ScheduleWebApp.Controllers
@@ -14,23 +13,20 @@ namespace ScheduleWebApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly dfkg9ojh16b4rdContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,dfkg9ojh16b4rdContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
-        {
-           
+        {           
             return View();
         }
-
         public IActionResult Privacy()
         {
-            dfkg9ojh16b4rdContext db = new dfkg9ojh16b4rdContext();
-            var X = db.Users.ToList();
-            var y = 1;
             return View();
         }
 
