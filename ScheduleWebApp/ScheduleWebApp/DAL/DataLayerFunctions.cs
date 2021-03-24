@@ -4,7 +4,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
-namespace ScheduleWebApp.DAL
+namespace ScheduleWebApp
 {
     public class DataLayerFunctions
     {

@@ -58,6 +58,9 @@ namespace ScheduleWebApp
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "schedule",
+                    pattern: "{controller=ScheduleTable}/{action=Show}");
             });
         }
     }
