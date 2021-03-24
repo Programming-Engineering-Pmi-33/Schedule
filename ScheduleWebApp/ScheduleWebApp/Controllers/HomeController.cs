@@ -23,13 +23,6 @@ namespace ScheduleWebApp.Controllers
 
         public IActionResult Index()
         {
-            DataLayerFunctions data = new DataLayerFunctions(_context);
-            var f=data.GetFaculties();
-            var r=data.GetRequests();
-            var g=data.GetFacultyGroups("aaaa");
-            var x = DetailedScheduleFunctions.GetLecturerSchedule("f", "fff", _context);
-            var y = DetailedScheduleFunctions.GetGroupSchedule(1, "aa", _context);
-
             return View();
         }
         public IActionResult Privacy()
