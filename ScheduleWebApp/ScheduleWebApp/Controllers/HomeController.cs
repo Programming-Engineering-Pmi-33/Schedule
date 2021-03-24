@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using ScheduleWebApp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ScheduleWebApp.Controllers
 {
@@ -21,10 +22,21 @@ namespace ScheduleWebApp.Controllers
             _context = context;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
             return View();
         }
+
+        public IActionResult Test()
+        {
+            DAL.DataLayerFunctions data = new DAL.DataLayerFunctions(_context);
+            var f = data.GetFaculties();
+            var r = data.GetRequests();
+            var g = data.GetFacultyGroups("aaaa");
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
