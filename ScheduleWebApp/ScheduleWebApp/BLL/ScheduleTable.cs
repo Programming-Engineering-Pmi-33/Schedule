@@ -13,6 +13,8 @@ namespace ScheduleWebApp
         public List<DetailedSchedule> DetailedSchedules { get; set; }
         public List<FacultyGroup> Groups { get; set; }
         public List<Faculty> Faculties { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
 
         private string chosenFaculty;
         public string FacultyName
@@ -46,9 +48,9 @@ namespace ScheduleWebApp
         {
             Groups = functions.GetFacultyGroups(chosenFaculty);
         }
-        public void GetSchedule(string name, string surname)
+        public void GetSchedule()
         {
-           DetailedSchedules = DetailedScheduleFunctions.GetLecturerSchedule(name, surname, dbContext);
+           DetailedSchedules = DetailedScheduleFunctions.GetLecturerSchedule(Name, Surname, dbContext);
            DetailedSchedules = DetailedScheduleFunctions.GetGroupSchedule(Convert.ToInt32(choosenPeriod), chooosenGroup, dbContext);
         }
         public void SetFacultyName(string name)
