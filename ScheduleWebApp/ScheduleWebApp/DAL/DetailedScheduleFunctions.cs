@@ -8,7 +8,7 @@ namespace ScheduleWebApp
 {
     public class DetailedScheduleFunctions
     {
-        //public static dfkg9ojh16b4rdContext db { get; set; }
+        public static dfkg9ojh16b4rdContext db { get; set; }
 
         public static List<DetailedSchedule> GetLecturerSchedule(string lecturerName, string lecturerSurname, dfkg9ojh16b4rdContext db)
         {
