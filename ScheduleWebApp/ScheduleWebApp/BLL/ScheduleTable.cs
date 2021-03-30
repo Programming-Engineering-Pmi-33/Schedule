@@ -49,7 +49,7 @@ namespace ScheduleWebApp
         public void GetSchedule(string name, string surname)
         {
            DetailedSchedules = DetailedScheduleFunctions.GetLecturerSchedule(name, surname, dbContext);
-           DetailedSchedules = DetailedScheduleFunctions.GetGroupSchedule(Convert.ToInt32(choosenPeriod), chooosenGroup, dbContext);
+           //DetailedSchedules = DetailedScheduleFunctions.GetGroupSchedule(Convert.ToInt32(choosenPeriod), chooosenGroup, dbContext);
         }
         public void SetFacultyName(string name)
         {
