@@ -1,8 +1,37 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model ScheduleWebApp.Models.ScheduleList
 @{
     Layout = null;
-    //WebGrid grid = new WebGrid();
+    
 }
-<h1>Hello world!</h1>
+<html>
+<head>
+
+</head>
+<body>
+    @Html.DropDownList("Name", ViewBag.Faculty as SelectList)
+    @Html.DropDownList("Period", ViewBag.Period as SelectList)
+    @Html.DropDownList("Groups", ViewBag.Group as SelectList)
+    <table>
+        <tr>
+            <th>Time</th>
+            <th>Subject</th>
+            <th>Lecturer</th>
+            <th>Type</th>
+            <th>Audience</th>
+        </tr>
+        @foreach(DetailedSchedule detailed in Model.Schedules)
+            {
+                <tr>
+                    <td>@detailed.Time</td>
+                    <td>@detailed.NameOfSubject</td>
+                    <td>@detailed.FullNameOfLecturer</td>
+                    <td>@detailed.DoublePeriodType</td>
+                    <td>@detailed.AudienceNumber</td>
+                </tr>
+            }
+    </table>
+</body>
+</html>
+
+
+
