@@ -24,8 +24,6 @@ namespace ScheduleWebApp
                 GetGroups();
             }
         }
-        private string chooosenGroup;
-        private string choosenPeriod;
         dfkg9ojh16b4rdContext dbContext;
         DataLayerFunctions functions;
         public ScheduleTable()
