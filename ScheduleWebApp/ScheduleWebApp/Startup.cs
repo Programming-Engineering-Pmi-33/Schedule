@@ -61,6 +61,9 @@ namespace ScheduleWebApp
                 endpoints.MapControllerRoute(
                     name: "schedule",
                     pattern: "{controller=ScheduleTable}/{action=Show}");
+                endpoints.MapControllerRoute(
+                    name: "teacher",
+                    pattern: "{controller=Teacher}/{action=Profile}");
             });
         }
     }

@@ -18,15 +18,20 @@ namespace ScheduleWebApp.Controllers
             _logger = logger;
             _context = context;
         }
-        public List<Faculty> Show()
+        //public List<Faculty> Show()
+        //{
+        //    ScheduleTable scheduleTable = new ScheduleTable(_context);
+        //    return scheduleTable.Faculties;
+        //}
+        //public IActionResult Table()
+        //{
+        //    return View();
+        //}
+        [HttpGet]
+        public ActionResult Show()
         {
             ScheduleTable scheduleTable = new ScheduleTable(_context);
-            return scheduleTable.Faculties;
+            return View(scheduleTable.DetailedSchedules);
         }
-        public IActionResult Table()
-        {
-            return View();
-        }
-
     }
 }
