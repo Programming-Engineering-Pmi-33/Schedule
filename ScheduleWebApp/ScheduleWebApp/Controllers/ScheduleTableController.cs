@@ -32,9 +32,9 @@ namespace ScheduleWebApp.Controllers
         }
         public IActionResult Table()
         {
-            scheduleTable.SetFacultyName("aaaa");
+            scheduleTable.SetFacultyName("aa");
            
-            scheduleTable.GetSchedule("Liubomyr", "Halamaha");
+            scheduleTable.GetSchedule("Lubomyr", "Halamaha");
             Models.ScheduleList scheduleList = new Models.ScheduleList { Schedules = scheduleTable.DetailedSchedules };
             return View(scheduleList);
         }

@@ -5,7 +5,7 @@ namespace ScheduleWebApp.BLL
 {
     public class TeacherService
     {
-        private readonly dfkg9ojh16b4rdContext db;
+        private dfkg9ojh16b4rdContext db;
         public TeacherModel Teacher { get; set; }
 
 
