@@ -1,0 +1,72 @@
+﻿.main{
+    display:block;
+}
+.profile-form {
+    position: absolute;
+    float: right;
+    top: -300px;
+    right: -120px;
+    display: flex;
+    width: 1040px;
+    height: 633px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+}
+
+.form-group {
+    float: left;
+    width: 429px;
+    margin: 70px 30px 70px 30px;
+    height: 78px;
+}
+.form-group img {
+    border-radius: 30px;
+    width: 201px;
+    height: 201px;
+    object-fit: cover;
+}
+
+    .form-group label {
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 22px;
+        display: flex;
+        align-items: center;
+        letter-spacing: 0.22px;
+        color: #000000;
+        opacity: 0.3;
+    }
+    .form-group input {
+        margin-top: 33px;
+        border: 0;
+        outline: 0;
+        background: transparent;
+        border-bottom: 1px solid black;
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+    }
+    .buttons {
+        position: absolute;
+        margin-top: 350px;
+        display: flex;
+        transform: translate(-50%, -50%);
+    }
+.buttons input{
+    width: 90px;
+    height: 46px;
+    margin: 30px;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 50px;
+    align-items: center;
+    letter-spacing: 0.22px;
+    text-transform: capitalize;
+    color: #263238;
+}
