@@ -11,8 +11,8 @@ namespace ScheduleWebApp
     {
 
         public List<DetailedSchedule> DetailedSchedules { get; set; }
-        public List<FacultyGroup> Groups { get; set; }
-        public List<Faculty> Faculties { get; set; }
+        public List<string> GroupsNames { get; set; }
+        public List<string> Faculties { get; set; }
 
         private string chosenFaculty;
         public string FacultyName
@@ -34,20 +34,34 @@ namespace ScheduleWebApp
         {
             dbContext = context;
             functions = new DataLayerFunctions(dbContext);
-            Faculties = GetFaculties();
+            Faculties = GetFacultiesNames();
         }
-        private List<Faculty> GetFaculties()
+        private List<string> GetFacultiesNames()
         {
-            return functions.GetFaculties();
+            List<string> facultiesNames = new List<string>();
+            var facultyObjects = functions.GetFaculties();
+            foreach(var faculty in facultyObjects)
+            {
+                facultiesNames.Add(faculty.Name);
+            }
+            return facultiesNames;
         }
         private void GetGroups()
         {
-            Groups = functions.GetFacultyGroups(chosenFaculty);
+            GroupsNames = new List<string>();
+            var groups = functions.GetFacultyGroups(chosenFaculty);
+            foreach(var group in groups)
+            {
+                GroupsNames.Add(group.GroupName);
+            }
         }
         public void GetSchedule(string name, string surname)
         {
            DetailedSchedules = DetailedScheduleFunctions.GetLecturerSchedule(name, surname, dbContext);
-           //DetailedSchedules = DetailedScheduleFunctions.GetGroupSchedule(Convert.ToInt32(choosenPeriod), chooosenGroup, dbContext);
+        }
+        public void GetSchedule(int chosenPeriod, string chosenGroup)
+        {
+            DetailedSchedules = DetailedScheduleFunctions.GetGroupSchedule(chosenPeriod, chosenGroup, dbContext);
         }
         public void SetFacultyName(string name)
         {

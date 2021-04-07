@@ -1,0 +1,4 @@
+﻿@model FacultyDropDownListModel
+@{
+    @Html.DropDownListFor(x=>x.SelectedValue, new SelectList(Model.Values), new {onchange = "GetTable(this.value)"})
+}

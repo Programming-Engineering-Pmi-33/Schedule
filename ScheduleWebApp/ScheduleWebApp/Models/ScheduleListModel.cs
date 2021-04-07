@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ScheduleWebApp.Models
 {
-    public class ScheduleList
+    public class ScheduleListModel
     {
        
         public List<DetailedSchedule> Schedules { get; set; }
