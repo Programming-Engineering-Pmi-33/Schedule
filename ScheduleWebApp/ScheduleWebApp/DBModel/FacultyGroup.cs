@@ -1,0 +1,13 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace ScheduleWebApp
+{
+    public class FacultyGroup
+    {
+        public string GroupName { get; set; }
+
+    }
+}

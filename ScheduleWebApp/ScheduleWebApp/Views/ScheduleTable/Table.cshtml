@@ -1,0 +1,193 @@
+﻿@model ScheduleWebApp.Models.ScheduleList
+@{
+    Layout = null;
+
+}
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  
+    <style>
+    label, input { display:block; }
+    input.text { margin-bottom:12px; width:95%; padding: .4em; }
+    fieldset { padding:0; border:0; margin-top:25px; }
+    h1 { font-size: 1.2em; margin: .6em 0; }
+    div#users-contain { width: 350px; margin: 20px 0; }
+    div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
+    div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
+    .ui-dialog .ui-state-error { padding: .3em; }
+    .validateTips { border: 1px solid transparent; padding: 0.3em; }
+    </style>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+    <script>
+        window.onload = function () {
+            $.ajax({
+                cache: true,
+                url: '@Url.Action("GetViewBags", "ScheduleTable")',
+                type: 'Get',
+                success: function (result) {
+                    if (result.success == true) {
+                        alert('Item successfully.');
+                    }
+                    else {
+                        alert('Item removed.');
+                    }
+                }
+                
+            })
+        };
+    </script>
+    <!--
+       Видає помилку через те, що грузиться одночасно з сторінкою
+        Знайти метод для асинхронного подання випадайок 
+        або ініціалізувати порожні і динамічно міняти
+    -->
+     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    var dialog, form,
+      time = $( "#time" ),
+      subject = $( "#subject" ),
+      lecturer = $("#lecturer"),
+      type = $("#type"),
+      audience = $("#audience")
+      allFields = $([]).add(time).add(subject).add(lecturer).add(type).add(audience),
+      tips = $( ".validateTips" );
+ 
+    function updateTips( t ) {
+      tips
+        .text( t )
+        .addClass( "ui-state-highlight" );
+      setTimeout(function() {
+        tips.removeClass( "ui-state-highlight", 1500 );
+      }, 500 );
+    }
+      
+    function addSubject() {
+      var valid = true;
+      allFields.removeClass( "ui-state-error" );
+      if ( valid ) {
+          $( "#subjects tbody" ).append( "<tr>" +
+          "<td>" + time.val() + "</td>" +
+          "<td>" + subject.val() + "</td>" +
+          "<td>" + lecturer.val() + "</td>" +
+          "<td>" + type.val() + "</td>" +
+          "<td>" + audience.val() + "</td>" +
+        "</tr>" );
+        dialog.dialog( "close" );
+      }
+      return valid;
+    }
+ 
+    dialog = $( "#dialog-form" ).dialog({
+      autoOpen: false,
+      height: 400,
+      width: 350,
+      modal: true,
+      buttons: {
+        "Add subject": addSubject,
+        Cancel: function() {
+          dialog.dialog( "close" );
+        }
+      },
+      close: function() {
+        form[ 0 ].reset();
+        allFields.removeClass( "ui-state-error" );
+      }
+    });
+ 
+    form = dialog.find( "form" ).on( "submit", function( event ) {
+      event.preventDefault();
+      addSubject();
+    });
+ 
+      $( "#create-subject" ).button().on( "click", function() {
+      dialog.dialog( "open" );
+    });
+  } );
+  </script>
+    <!--
+     Добавити валідацію об'єктів, щоб не було колізій і неправильно набраних даних   
+    -->
+     <!--
+        У фунції {updateTips} перевизначити все для відповідних полів
+        
+    -->
+</head>
+<body>
+ 
+<div id="dialog-form" title="Create new subject">
+  <form>
+    <fieldset>
+      <label for="time">Time</label>
+      <input type="text" name="time" id="time" class="text ui-widget-content ui-corner-all">
+      <label for="subject">Subject</label>
+      <input type="text" name="subject" id="subject" class="text ui-widget-content ui-corner-all">
+      <label for="lecturer">Lecturer</label>
+      <input name="lecturer" id="lecturer" class="text ui-widget-content ui-corner-all">
+      <label for="type">Type</label>
+      <input name="type" id="type" class="text ui-widget-content ui-corner-all">
+      <label for="audience">Audience</label>
+      <input name="audience" id="audience" class="text ui-widget-content ui-corner-all">
+ 
+      <!-- Allow form submission with keyboard without duplicating the dialog button -->
+      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+    </fieldset>
+  </form>
+</div>
+ <!--
+    Розібратися з віджетом діалогу, переписати поля і конструктори для своєї моделі
+    Після submit повертати до попереднього вікна з динамічним додавання рядка таблиці 
+ -->
+ 
+<div id="users-contain" class="ui-widget">
+    @using (Html.BeginForm("GetPeriodDropDown", "ScheduleTable", FormMethod.Post))
+    {
+        //@Html.DropDownList("Period", ViewBag.Period as SelectList, new { onchange = "this.form.submit();" })
+    }
+    @*@Html.DropDownList("Name", ViewBag.Faculty as SelectList)
+
+        @Html.DropDownList("Groups", ViewBag.Group as SelectList)*@
+    <h1>Existing schedule:</h1>
+    <table id="subjects" class="ui-widget ui-widget-content">
+        <thead>
+            <tr class="ui-widget-header ">
+                <th>Time</th>
+                <th>Subject</th>
+                <th>Lecturer</th>
+                <th>Type</th>
+                <th>Audience</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (DetailedSchedule detailed in Model.Schedules)
+            {
+                <tr>
+                    <td>@detailed.Time</td>
+                    <td>@detailed.NameOfSubject</td>
+                    <td>@detailed.FullNameOfLecturer</td>
+                    <td>@detailed.DoublePeriodType</td>
+                    <td>@detailed.AudienceNumber</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<button id="create-subject">Create new subject</button>
+ 
+ <!--
+  Замінити цей контейнер на власноруч написаний, він знаходиться нижче   
+ -->
+</body>
+</html>
+
+
+

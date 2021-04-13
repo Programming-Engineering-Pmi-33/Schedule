@@ -1,0 +1,51 @@
+﻿@model ScheduleWebApp.Models.TeacherModel
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    
+    <head>
+        <link rel="stylesheet" href="~/css/profile.css" />
+    </head>
+   
+    <hr />
+    <div class="main">
+        <div class="profile-form">
+            <form asp-action="Profile">
+                <div class="form-group">
+                    <input asp-for="Id" type="hidden" class="form-control" />
+                    <span asp-validation-for="Id" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <img class="form-group-img" src="@Url.Content("~/images/profile.png")" alt="Manage Library Assets">
+                </div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="field-validation-valid"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Surname" class="control-label"></label>
+                    <input asp-for="Surname" class="form-control" />
+                    <span asp-validation-for="Surname" class="field-validation-valid"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Position" class="control-label"></label>
+                    <input asp-for="Position" class="form-control" />
+                    <span asp-validation-for="Position" class="field-validation-valid"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="field-validation-valid"></span>
+                </div>
+            </form>
+        </div>
+        <div class="buttons">
+            <input type="submit" value="Save" class="btn btn-primary" />
+            <input type="button" onclick="location.href='@Url.Action("Show","Teacher")'" value="Cancel" class="btn btn-primary" />
+        </div>
+
+    </div>
+
+
