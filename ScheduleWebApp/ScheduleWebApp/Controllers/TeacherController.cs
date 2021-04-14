@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using ScheduleWebApp.BLL;
 using ScheduleWebApp.Models;
+using System.IO;
 
 namespace ScheduleWebApp.Controllers
 {
@@ -48,6 +49,16 @@ namespace ScheduleWebApp.Controllers
             {
                 return View();
             }
+        }
+
+        public void ChangePhoto(TeacherModel user, IFormFile file)
+        {
+            using (var reader = file.OpenReadStream())
+            {
+                user.Image = file.FileName;
+                teacherService.Edit(user);
+            }
+            
         }
 
     }
