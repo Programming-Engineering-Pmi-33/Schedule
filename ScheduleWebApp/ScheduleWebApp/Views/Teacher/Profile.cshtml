@@ -13,11 +13,13 @@
         <div class="profile-form">
             <form asp-action="Profile">
                 <div class="form-group">
+                    <img asp-for="Image" class="form-group-img" src="@Url.Content(Model.Image)" alt="Manage Library Assets">
+                </div>
+                <input class="form-group-button" type="button" onclick="location.href='@Url.Action("ChangePhoto","Teacher")'" value="Change photo" />
+
+                <div class="form-group">
                     <input asp-for="Id" type="hidden" class="form-control" />
                     <span asp-validation-for="Id" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <img class="form-group-img" src="@Url.Content("~/images/profile.png")" alt="Manage Library Assets">
                 </div>
                 <div class="form-group">
                     <label asp-for="Name" class="control-label"></label>

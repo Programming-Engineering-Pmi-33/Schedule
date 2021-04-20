@@ -1,4 +1,5 @@
-﻿using ScheduleWebApp.Models;
+﻿using Microsoft.AspNetCore.Http;
+using ScheduleWebApp.Models;
 using System.Linq;
 
 namespace ScheduleWebApp.BLL
@@ -19,7 +20,7 @@ namespace ScheduleWebApp.BLL
                 Surname = user.Surname,
                 Position = user.Position,
                 Password = user.Password,
-                Image = ""
+                Image = user.Image
             };
         }
 
@@ -29,6 +30,7 @@ namespace ScheduleWebApp.BLL
             user.Name = teacher.Name;
             user.Surname = teacher.Surname;
             user.Position = teacher.Position;
+            user.Image = teacher.Avatar.FileName;
             if(teacher.Password!=null)
                 user.Password = teacher.Password;
             db.Users.Update(user);

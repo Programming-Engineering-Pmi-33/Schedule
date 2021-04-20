@@ -171,6 +171,9 @@ namespace ScheduleWebApp
                 entity.Property(e => e.Surname)
                     .HasColumnType("character varying")
                     .HasColumnName("surname");
+                entity.Property(e => e.Image)
+                    .HasColumnType("character varying")
+                    .HasColumnName("Image");
             });
 
             modelBuilder.Entity<UserSubject>(entity =>

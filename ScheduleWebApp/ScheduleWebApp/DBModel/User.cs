@@ -20,6 +20,7 @@ namespace ScheduleWebApp
         public string Password { get; set; }
         public string Salt { get; set; }
         public bool? IsAdmin { get; set; }
+        public string Image { get; set; }
 
         public virtual ICollection<Request> Requests { get; set; }
         public virtual ICollection<UserSubject> UserSubjects { get; set; }
