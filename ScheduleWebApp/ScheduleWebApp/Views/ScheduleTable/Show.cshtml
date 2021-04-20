@@ -1,0 +1,66 @@
+﻿@model IEnumerable<ScheduleWebApp.DetailedSchedule>
+
+@{
+    ViewData["Title"] = "Show";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Show</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Day)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Time)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NameOfSubject)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FullNameOfLecturer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DoublePeriodType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AudienceNumber)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Day)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameOfSubject)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullNameOfLecturer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DoublePeriodType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AudienceNumber)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
