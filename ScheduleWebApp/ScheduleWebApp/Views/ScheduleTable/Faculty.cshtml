@@ -1,7 +1,7 @@
 ﻿@model FacultyDropDownListModel
 @{
-    <body>
-        @Html.DropDownListFor(x => x.SelectedValue, new SelectList(Model.Values), new { onchange = "GetGroups(this.value)" })
-    </body>
+    
+        @Html.DropDownListFor(x => x.SelectedValue, new SelectList(Model.Values), "Select the faculty", new { onchange = "GetGroups(this.value)", id = "faculty" })
+    
 
 }

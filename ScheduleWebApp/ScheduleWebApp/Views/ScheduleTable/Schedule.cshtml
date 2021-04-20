@@ -1,0 +1,122 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <link rel="stylesheet" href="~/css/ScheduleTable.css"/>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+    <script>
+      function SendDataToController(time, subject, lecturer, type, audience) {
+            $.ajax({
+                cache: false,
+                url: '@Url.Action("AddSubject", "ScheduleTable")',
+                type: 'Post',
+                data: { time: time,subject:subject,lecturer:lecturer,type:type,audience:audience},
+                success: function (result) {
+                    console.log(result);
+                }
+            })
+        };
+    </script>
+    <script>
+        function Calling(selectedValue) {
+
+            $.ajax({
+                cache: false,
+                url: '@Url.Action("GetPeriod", "ScheduleTable")',
+                type: 'Get',
+                data: {selected: selectedValue},
+                success: function (result) {
+                    var div = $("#period")
+                    div.html(result);
+                    console.log(selectedValue);
+                    window.localStorage.setItem('selected', selectedValue);
+                }
+            })
+        };
+    </script>
+    <script>
+        function GetGroups(selectedValue) {
+            $.ajax({
+                cache: false,
+                url: '@Url.Action("GetGroups", "ScheduleTable")',
+                type: 'Get',
+                data: { selected: selectedValue },
+                success: function (result) {
+                    var div = $("#groups")
+                    div.html(result);
+                    console.log(selectedValue);
+                }
+            })
+        };
+    </script>
+    <script>
+        function GetTable(selectedValue) {
+            $.ajax({
+                cache: false,
+                url: '@Url.Action("GetTable", "ScheduleTable")',
+                type: 'Get',
+                data: { selectedPeriod: window.localStorage.getItem('selected'),selected: selectedValue  },
+                success: function (result) {
+                    var div = $("#table")
+                    div.html(result);
+                }
+            })
+        };
+    </script>
+    <script>
+        function GetDay(step) {
+            var days = ['M', 'T', 'W', "Th", "F"]
+            if (step>days.length-1)
+            {
+                
+            }
+            if (step<0) {
+
+            }
+            $.ajax({
+                 cache: false,
+                url: '@Url.Action("GetTable", "ScheduleTable")',
+                type: 'Get',
+                data: { day: days[step] },
+                success: function (result) {
+                    var div = $("#table")
+                    div.html(result);
+                }
+            })            
+        };
+    </script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!--
+     Добавити валідацію об'єктів, щоб не було колізій і неправильно набраних даних
+    -->
+    <!--
+        У фунції {updateTips} перевизначити все для відповідних полів
+
+    -->
+</head>
+<body>
+    <div>
+        @await Html.PartialAsync("Period", new PeriodDropDownModel { SelectedValue = 0, Values = new List<int> { 1, 2 } })
+    </div>
+    <div>
+        @await Html.PartialAsync("Faculty", ViewData["FacultyNames"])
+    </div>
+    <div id="groups"></div>
+    <div id="table">
+        @await Html.PartialAsync("Table", null)
+    </div>
+    <button id="left-button"></button>
+    <button id="right-button"></button>
+</body>
+</html>
+
+
+
+

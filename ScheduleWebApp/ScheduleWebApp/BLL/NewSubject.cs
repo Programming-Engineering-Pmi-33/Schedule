@@ -7,7 +7,7 @@ namespace ScheduleWebApp.BLL
 {
     public class NewSubject
     {
-        private dfkg9ojh16b4rdContext Db { get; set; }
+        private dfkg9ojh16b4rdContext Db;
         public NewSubject(dfkg9ojh16b4rdContext db)
         {
             Db = db;
@@ -16,6 +16,10 @@ namespace ScheduleWebApp.BLL
         public bool AddNewSubject()
         {
             return true;
+        }
+        private void Addnew()
+        {
+
         }
     }
 }

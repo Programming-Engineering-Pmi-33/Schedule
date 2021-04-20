@@ -52,6 +52,21 @@ namespace ScheduleWebApp.Controllers
             scheduleTable.GetSchedule(selectedPeriod, selected);
             return PartialView("Table", new ScheduleListModel { Schedules = scheduleTable.DetailedSchedules });
         }
+        [HttpPost]
+        public IActionResult AddSubject(string time, string subject, string lecturer, string type, string audience)
+        {
+
+            return new EmptyResult(); 
+        }
+        [HttpGet]
+        public PartialViewResult GetDay(string day, string order)
+        {
+           string newDay = "";
+            var result = (from element in scheduleTable.DetailedSchedules
+                         where element.Day == newDay
+                         select element).ToList();
+            return PartialView("Table", new ScheduleListModel { Schedules = result });
+        }
         //тутай буде функція для розкладу викладача, аби лиш мати логін
     }
 }
