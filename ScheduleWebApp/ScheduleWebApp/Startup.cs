@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
+using System;
+using System.IO;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using ScheduleWebApp.BLL;
+using ScheduleWebApp.DAL;
 
 namespace ScheduleWebApp
 {
@@ -39,6 +39,24 @@ namespace ScheduleWebApp
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
 
             });
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+                {
+                    options.LoginPath = "/User/Login";
+                    options.LogoutPath = "/User/Logout";
+                });
+
+            services.AddMvc();
+
+            // authentication 
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            });
+
+            services.AddScoped<UserService>();
+            services.AddScoped<UserFunctions>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,9 +75,18 @@ namespace ScheduleWebApp
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSession();
-            app.UseRouting();
 
+            app.UseAuthentication();
+            app.UseRouting();
             app.UseAuthorization();
+
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), "css")),
+                RequestPath = "/css"
+            });
 
             app.UseEndpoints(endpoints =>
             {
@@ -72,6 +99,9 @@ namespace ScheduleWebApp
                 endpoints.MapControllerRoute(
                     name: "teacher",
                     pattern: "{controller=Teacher}/{action=Profile}");
+                endpoints.MapControllerRoute(
+                    name: "login",
+                    pattern: "{controller=User}/{action=Login}");
             });
         }
     }

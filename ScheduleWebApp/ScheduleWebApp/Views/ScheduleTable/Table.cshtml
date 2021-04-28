@@ -1,7 +1,6 @@
-﻿@model ScheduleWebApp.Models.ScheduleList
+﻿@model ScheduleWebApp.Models.ScheduleListModel
 @{
     Layout = null;
-
 }
 
 <!doctype html>
@@ -18,38 +17,38 @@
     input.text { margin-bottom:12px; width:95%; padding: .4em; }
     fieldset { padding:0; border:0; margin-top:25px; }
     h1 { font-size: 1.2em; margin: .6em 0; }
-    div#users-contain { width: 350px; margin: 20px 0; }
-    div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
-    div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
+        div#users-contain {
+            position: relative;
+            width: 806px;
+            height: 546px;
+            left: 459px;
+            top: 343px;
+            border: 1px solid;
+            background: #C4C4C4;
+        }
+        div#users-contain table {
+            position:static; 
+            border:1px solid;
+            width: 797px;
+            height: 87px;
+            left: 468px;
+            top: 388px;
+            background: #E8E4E4;
+        }
+    div#users-contain table td, div#users-contain table th { border: 1px solid; padding: .6em 10px; text-align: left; }
     .ui-dialog .ui-state-error { padding: .3em; }
     .validateTips { border: 1px solid transparent; padding: 0.3em; }
+        #create-subject {
+            position: absolute;
+            width: 278px;
+            height: 46px;
+            left: 702px;
+            top: 932px;
+            background: #C4C4C4;
+            border-radius: 5px;
+        }
     </style>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
-    <script>
-        window.onload = function () {
-            $.ajax({
-                cache: true,
-                url: '@Url.Action("GetViewBags", "ScheduleTable")',
-                type: 'Get',
-                success: function (result) {
-                    if (result.success == true) {
-                        alert('Item successfully.');
-                    }
-                    else {
-                        alert('Item removed.');
-                    }
-                }
-                
-            })
-        };
-    </script>
-    <!--
-       Видає помилку через те, що грузиться одночасно з сторінкою
-        Знайти метод для асинхронного подання випадайок 
-        або ініціалізувати порожні і динамічно міняти
-    -->
-     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script>
   $( function() {
@@ -81,7 +80,8 @@
           "<td>" + lecturer.val() + "</td>" +
           "<td>" + type.val() + "</td>" +
           "<td>" + audience.val() + "</td>" +
-        "</tr>" );
+              "</tr>");
+        SendDataToController(time.val(), subject.val(), lecturer.val(), type.val(), audience.val());
         dialog.dialog( "close" );
       }
       return valid;
@@ -99,14 +99,14 @@
         }
       },
       close: function() {
-        form[ 0 ].reset();
+          form[0].reset();
         allFields.removeClass( "ui-state-error" );
       }
     });
  
     form = dialog.find( "form" ).on( "submit", function( event ) {
-      event.preventDefault();
-      addSubject();
+        event.preventDefault();
+        addSubject();
     });
  
       $( "#create-subject" ).button().on( "click", function() {
@@ -147,15 +147,7 @@
     Розібратися з віджетом діалогу, переписати поля і конструктори для своєї моделі
     Після submit повертати до попереднього вікна з динамічним додавання рядка таблиці 
  -->
- 
 <div id="users-contain" class="ui-widget">
-    @using (Html.BeginForm("GetPeriodDropDown", "ScheduleTable", FormMethod.Post))
-    {
-        //@Html.DropDownList("Period", ViewBag.Period as SelectList, new { onchange = "this.form.submit();" })
-    }
-    @*@Html.DropDownList("Name", ViewBag.Faculty as SelectList)
-
-        @Html.DropDownList("Groups", ViewBag.Group as SelectList)*@
     <h1>Existing schedule:</h1>
     <table id="subjects" class="ui-widget ui-widget-content">
         <thead>
@@ -167,6 +159,8 @@
                 <th>Audience</th>
             </tr>
         </thead>
+        @if (Model != null)
+        {
         <tbody>
             @foreach (DetailedSchedule detailed in Model.Schedules)
             {
@@ -179,13 +173,10 @@
                 </tr>
             }
         </tbody>
+        }
     </table>
 </div>
 <button id="create-subject">Create new subject</button>
- 
- <!--
-  Замінити цей контейнер на власноруч написаний, він знаходиться нижче   
- -->
 </body>
 </html>
 

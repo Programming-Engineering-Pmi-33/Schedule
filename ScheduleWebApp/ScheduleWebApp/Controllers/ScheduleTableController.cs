@@ -10,6 +10,8 @@ using Microsoft.Extensions.Logging;
 
 using Newtonsoft.Json;
 
+using ScheduleWebApp.Models;
+
 namespace ScheduleWebApp.Controllers
 {
     public class ScheduleTableController : Controller
@@ -17,6 +19,7 @@ namespace ScheduleWebApp.Controllers
         private readonly ILogger<ScheduleTableController> _logger;
         private readonly dfkg9ojh16b4rdContext _context;
         public ScheduleTable scheduleTable;
+        public int ChoosenPeriod { get; set; }
 
         public ScheduleTableController(ILogger<ScheduleTableController> logger, dfkg9ojh16b4rdContext context)
         {
@@ -25,53 +28,45 @@ namespace ScheduleWebApp.Controllers
             scheduleTable = new ScheduleTable(_context);
 
         }
-        public List<Faculty> Show()
+        public IActionResult Schedule()
         {
-            ScheduleTable scheduleTable = new ScheduleTable(_context);
-            return scheduleTable.Faculties;
-        }
-        public IActionResult Table()
-        {
-            scheduleTable.SetFacultyName("aa");
-           
-            scheduleTable.GetSchedule("Lubomyr", "Halamaha");
-            Models.ScheduleList scheduleList = new Models.ScheduleList { Schedules = scheduleTable.DetailedSchedules };
-            return View(scheduleList);
-        }
-        private void SelectGroups()
-        {
-            List<string> groups = new List<string>();
-            foreach (var group in scheduleTable.Groups)
-            {
-                groups.Add(group.GroupName);
-            }
-            ViewBag.Groups = new SelectList(groups, "GroupName");
-        }
-        private void SelectFaculty()
-        {
-            ViewBag.Faculty = new SelectList(scheduleTable.Faculties.ToString(), "Name");
-        }
-        private void SelectPeriod()
-        {
-            ViewBag.Period = new SelectList(new List<int>() { 1, 2 }, "Periods");
-        }
-        private void GetTable()
-        {
-
-        }
-        [HttpPost]
-        public void GetPeriodDropDown(int Period)
-        {
-            var x = Period;
-            ViewBag.Period = new SelectList(new List<int>() { 1, 5, 4 }, "Periods");
-            return;
+            //scheduleTable.GetSchedule("Lubomyr", "Halamaha");
+            ViewData["FacultyNames"] = new FacultyDropDownListModel { SelectedValue = null, Values = scheduleTable.Faculties };
+            return View();
         }
         [HttpGet]
-        public void GetViewBags()
+        public PartialViewResult GetPeriod(int selected)
         {
-            SelectPeriod();
-            SelectFaculty();
-            //SelectGroups();
+            return PartialView("Period", new PeriodDropDownModel { SelectedValue = selected, Values = new List<int> { 1, 2 } });
         }
+        [HttpGet]
+        public PartialViewResult GetGroups(string selected)
+        {
+            scheduleTable.SetFacultyName(selected);
+
+            return PartialView("Group", new FacultyDropDownListModel {SelectedValue = null, Values=scheduleTable.GroupsNames});
+        }
+        [HttpGet]
+        public PartialViewResult GetTable(int selectedPeriod, string selected)
+        {
+            scheduleTable.GetSchedule(selectedPeriod, selected);
+            return PartialView("Table", new ScheduleListModel { Schedules = scheduleTable.DetailedSchedules });
+        }
+        [HttpPost]
+        public IActionResult AddSubject(string time, string subject, string lecturer, string type, string audience)
+        {
+
+            return new EmptyResult(); 
+        }
+        [HttpGet]
+        public PartialViewResult GetDay(string day, string order)
+        {
+           string newDay = "";
+            var result = (from element in scheduleTable.DetailedSchedules
+                         where element.Day == newDay
+                         select element).ToList();
+            return PartialView("Table", new ScheduleListModel { Schedules = result });
+        }
+        //тутай буде функція для розкладу викладача, аби лиш мати логін
     }
 }

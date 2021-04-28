@@ -1,0 +1,57 @@
+﻿html {
+    position: relative;
+    width: 1440px;
+    height: 100%;
+    background: #FFFFFF;
+    font-size: 14px;
+}
+body {
+    position: relative;
+    width: 1440px;
+    height: 1024px;
+    background: #FFFFFF;
+}
+#period {
+    position: absolute;
+    width: 278.05px;
+    height: 45.87px;
+    left: 379px;
+    top: 190px;
+    background: #7E7E7E;
+}
+#faculty {
+    position: absolute;
+    width: 410.9px;
+    height: 46.95px;
+    left: 688px;
+    top: 190px;
+    background: #7E7E7E;
+}
+#group {
+    position: absolute;
+    width: 279.08px;
+    height: 46.95px;
+    left: 1117.92px;
+    top: 190.05px;
+    background: #7E7E7E;
+}
+#left-button {
+    position: absolute;
+    left: 375px;
+    top: 662px;
+    width: 0;
+    height: 0;
+    border-top: 60px solid white;
+    border-bottom: 60px solid white;
+    border-right: 60px solid red;
+}
+#right-button {
+    position: absolute;
+    left: 1280px;
+    top: 662px;
+    width: 0;
+    height: 0;
+    border-top: 60px solid white;
+    border-bottom: 60px solid white;
+    border-left: 60px solid green;
+}

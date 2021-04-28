@@ -1,0 +1,6 @@
+﻿@model PeriodDropDownModel
+@{
+    
+            @Html.DropDownListFor(x=>x.SelectedValue, new SelectList(Model.Values),"select period",  new { onchange = "Calling(this.value)", id="period" })
+    
+}
