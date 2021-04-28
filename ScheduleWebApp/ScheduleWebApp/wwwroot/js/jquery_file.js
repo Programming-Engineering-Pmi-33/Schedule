@@ -22,3 +22,20 @@
 //        }
 //    });
 //});
+
+//$(document).ready(function () {
+
+//    $('#saveForm').submit(function (e) {
+//        e.preventDefault();
+//        var $form = $(this);
+
+//        $.post($form.attr("action"), $form.serialize()).done(function (res) {
+//            $mymodal = $("#myModal");
+//            //update the modal's body with the response received
+//            $mymodal.find("div.modal-body").html(res);
+//            // Show the modal
+//            $mymodal.modal("show");
+//        });
+//    });
+
+//});

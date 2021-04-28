@@ -9,26 +9,25 @@ using Microsoft.Extensions.Logging;
 using ScheduleWebApp.BLL;
 using ScheduleWebApp.Models;
 using System.IO;
+using System.Security.Claims;
 
 namespace ScheduleWebApp.Controllers
 {
     public class TeacherController : Controller
     {
-        private readonly ILogger<TeacherController> logger;
         private TeacherService teacherService;
 
-        public TeacherController(ILogger<TeacherController> _logger, dfkg9ojh16b4rdContext _db)
+        public TeacherController( dfkg9ojh16b4rdContext _db)
         {
-            logger = _logger;
             teacherService =new TeacherService(_db);
         }
 
-       
-        public ActionResult Show()
+        public ViewResult Show()
         {
             return View(teacherService.Teacher);
         }
 
+        [HttpGet]
         public ActionResult Profile()
         {
             return View(teacherService.Teacher);
@@ -36,19 +35,27 @@ namespace ScheduleWebApp.Controllers
 
 
         [HttpPost]
-        public ActionResult Profile(TeacherModel user)
+        public ViewResult Profile(TeacherModel user)
         {
-            // var cookie = Session<User>.Deconvert(\\файли кукі)
-            // user.Id = cookie.Id
+           // var cookie =HttpContext.User.FindFirst(ClaimTypes.NameIdentifier); 
+
             if (ModelState.IsValid)
             {
-                teacherService.Edit(user);
-                return RedirectToAction(nameof(Show));
+                try
+                {
+                    teacherService.Edit(user);
+                    ViewBag.Massage = "Editing successful";
+                }
+                catch(ArgumentException ex)
+                {
+                    ViewBag.Massage = ex.Message;
+                }
             }
             else
             {
-                return View();
+                ViewBag.Massage = "Editing faild";
             }
+            return View();
         }
 
     }

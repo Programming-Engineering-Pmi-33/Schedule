@@ -40,7 +40,7 @@
     font-family: Montserrat;
     font-style: normal;
     font-weight: normal;
-    font-size: 18px;
+    font-size: 14px;
     line-height: 22px;
     display: flex;
     align-items: center;
@@ -57,17 +57,17 @@
     font-family: Montserrat;
     font-style: normal;
     font-weight: normal;
-    font-size: 18px;
+    font-size: 14px;
 }
 .buttons {
-    position: absolute;
-    margin-top: 350px;
-    display: flex;
-    transform: translate(-50%, -50%);
+    position:relative;
+    display:inline-flex;
+    bottom:10px;
 }
         
 
 .buttons input {
+    display:inline;
     margin: 30px;
     width:100%;
     padding-left:20px;

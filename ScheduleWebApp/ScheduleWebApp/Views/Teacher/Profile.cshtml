@@ -11,9 +11,9 @@
     <hr />
     <div class="main">
         <div class="profile-form">
-            <form asp-action="Profile">
+            <form asp-action="Profile" id="saveForm">
                 <div class="form-group">
-                    <img asp-for="Image" class="form-group-img" src="@Url.Content(Model.Image)" alt="Manage Library Assets">
+                    <img asp-for="Image" class="form-group-img" src="~/images/profile.png" alt="Manage Library Assets">
                 </div>
                 <input class="form-group-button" type="button" onclick="readURL()" value="Change photo" />
 
@@ -41,12 +41,32 @@
                     <input asp-for="Password" class="form-control" />
                     <span asp-validation-for="Password" class="field-validation-valid"></span>
                 </div>
+                <div class="buttons">
+                    <input type="submit" value="Save" onclick="window.location.reload()" class="btn btn-primary" />
+                    <input type="button" value="Cancel" onclick="window.location.reload()"class="btn btn-primary" />
+                </div>
             </form>
         </div>
-        <div class="buttons">
-            <input type="submit" value="Save" class="btn btn-primary" />
-            <input type="button" onclick="location.href='@Url.Action("Show","Teacher")'" value="Cancel" class="btn btn-primary" />
-        </div>
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close"
+                                data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title">Modal title</h4>
+                    </div>
+                    <div class="modal-body">
+                        @ViewBag.Massage
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div> 
+            </div>
+        </div> 
 
     </div>
 
