@@ -51,15 +51,5 @@ namespace ScheduleWebApp.Controllers
             }
         }
 
-        public void ChangePhoto(TeacherModel user, IFormFile file)
-        {
-            using (var reader = file.OpenReadStream())
-            {
-                user.Image = file.FileName;
-                teacherService.Edit(user);
-            }
-            
-        }
-
     }
 }
