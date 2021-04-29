@@ -36,53 +36,61 @@
     padding-bottom:80px;
 }
 
-    .form-group label {
-        font-family: Montserrat;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 18px;
-        line-height: 22px;
-        display: flex;
-        align-items: center;
-        letter-spacing: 0.22px;
-        color: #000000;
-        opacity: 0.3;
-    }
-    .form-group input {
-        margin-top: 33px;
-        border: 0;
-        outline: 0;
-        background: transparent;
-        border-bottom: 1px solid black;
-        font-family: Montserrat;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 18px;
-    }
-    .buttons {
-        position: absolute;
-        margin-top: 350px;
-        display: flex;
-        transform: translate(-50%, -50%);
-    }
-        .buttons input {
-            margin: 30px;
-            width:100%;
-            padding-left:20px;
-            padding-right:20px;
-            font-family: Montserrat;
-            font-size: 16px;
-            line-height: 50px;
-            align-items: center;
-            letter-spacing: 0.22px;
-            text-transform: capitalize;
-            color: #263238;
-            border-radius: 10px;
-            outline: 0;
-            background: transparent;
-            border-bottom: 0.4px solid black;
-            padding: 4px initial;
-        }
+.form-group label {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 22px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.22px;
+    color: #000000;
+    opacity: 0.3;
+}
+.form-group input {
+    margin-top: 33px;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-bottom: 1px solid black;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+}
+.buttons {
+    position:relative;
+    display:inline-flex;
+    bottom:10px;
+}
+        
+
+.buttons input {
+    display:inline;
+    margin: 30px;
+    width:100%;
+    padding-left:20px;
+    padding-right:20px;
+    font-family: Montserrat;
+    font-size: 16px;
+    line-height: 50px;
+    align-items: center;
+    letter-spacing: 0.22px;
+    text-transform: capitalize;
+    color: #263238;
+    border-radius: 10px;
+    outline: 0;
+    background: transparent;
+    border-bottom: 0.4px solid black;
+    padding: 4px initial;
+}
+.buttons input:hover{
+    border-color: #ffffff;
+    -moz-box-shadow: 0 0 4px #1287bf;
+    -webkit-box-shadow: 0 0 4px #1287bf;
+    box-shadow: 0 0 4px #1287bf;
+}
 
 .form-group-button {
     position: absolute;
@@ -100,4 +108,10 @@
     background: transparent;
     border-bottom: 0.4px solid black;
     padding: 4px initial;
+}
+.form-group-button:hover {
+    border-color: #ffffff;
+    -moz-box-shadow: 0 0 4px #1287bf;
+    -webkit-box-shadow: 0 0 4px #1287bf;
+    box-shadow: 0 0 4px #1287bf;
 }
