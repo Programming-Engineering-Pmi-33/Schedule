@@ -20,4 +20,8 @@
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\css\login.css" />
+  </ItemGroup>
+
 </Project>

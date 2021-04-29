@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ScheduleWebApp
 {
-    public class ScheduleTable
+    public class ScheduleTableServices
     {
 
         public List<DetailedSchedule> DetailedSchedules { get; set; }
@@ -26,17 +26,17 @@ namespace ScheduleWebApp
         }
         dfkg9ojh16b4rdContext dbContext;
         DataLayerFunctions functions;
-        public ScheduleTable()
+        public ScheduleTableServices()
         {
 
         }
-        public ScheduleTable(dfkg9ojh16b4rdContext context)
+        public ScheduleTableServices(dfkg9ojh16b4rdContext context)
         {
             dbContext = context;
             functions = new DataLayerFunctions(dbContext);
             Faculties = GetFacultiesNames();
         }
-        private List<string> GetFacultiesNames()
+        public List<string> GetFacultiesNames()
         {
             List<string> facultiesNames = new List<string>();
             var facultyObjects = functions.GetFaculties();

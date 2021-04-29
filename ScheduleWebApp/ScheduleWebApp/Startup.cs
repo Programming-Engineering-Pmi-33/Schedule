@@ -81,12 +81,7 @@ namespace ScheduleWebApp
             app.UseAuthorization();
 
 
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                FileProvider = new PhysicalFileProvider(
-                    Path.Combine(Directory.GetCurrentDirectory(), "css")),
-                RequestPath = "/css"
-            });
+           
 
             app.UseEndpoints(endpoints =>
             {

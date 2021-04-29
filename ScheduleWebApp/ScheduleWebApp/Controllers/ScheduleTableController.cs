@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
-
-using Newtonsoft.Json;
 
 using ScheduleWebApp.Models;
 
@@ -18,16 +17,17 @@ namespace ScheduleWebApp.Controllers
     {
         private readonly ILogger<ScheduleTableController> _logger;
         private readonly dfkg9ojh16b4rdContext _context;
-        public ScheduleTable scheduleTable;
-        public int ChoosenPeriod { get; set; }
+        public ScheduleTableServices scheduleTable;
+       
 
         public ScheduleTableController(ILogger<ScheduleTableController> logger, dfkg9ojh16b4rdContext context)
         {
             _logger = logger;
             _context = context;
-            scheduleTable = new ScheduleTable(_context);
+            scheduleTable = new ScheduleTableServices(_context);
 
         }
+        
         public IActionResult Schedule()
         {
             //scheduleTable.GetSchedule("Lubomyr", "Halamaha");
